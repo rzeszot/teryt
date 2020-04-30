@@ -1,0 +1,13 @@
+name: polandia
+version: 0.0.1
+
+authors:
+  - Damian Rzeszot <damian.rzeszot@gmail.com>
+
+targets:
+  pna:
+    main: src/pna/main.cr
+
+crystal: 0.34.0
+
+license: MIT
