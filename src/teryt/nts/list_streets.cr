@@ -29,11 +29,14 @@ module TERYT
               element("ns1:Rodz") do
                 text(kind)
               end
+              element("ns1:msc") do
+                text([voivodeship_id, county_id, district_id, kind].join)
+              end
               element("ns1:czyWersjaUrzedowa") do
-                text(true)
+                text("true")
               end
               element("ns1:czyWersjaAdresowa") do
-                text(false)
+                text("false")
               end
               element("ns1:DataStanu") do
                 text("2020-04-22")
@@ -42,6 +45,8 @@ module TERYT
           end
         end
       end
+
+      puts string
 
       response = client.perform(string)
       body = response.body
