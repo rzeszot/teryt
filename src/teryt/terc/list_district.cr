@@ -1,16 +1,16 @@
 module TERYT
-  class District
-    getter :id, :name, :extra
-    def initialize(@id : String, @name : String, @extra : String, @kind : String)
+  class TERC
+    class District
+      getter :id, :name, :extra
+      def initialize(@id : String, @name : String, @extra : String, @kind : String)
+      end
     end
-  end
 
-  class Client
     def list_district(voivodeship_id, county_id)
       string = Builder.build do
         envelope do
           header do
-            username_token(username, password)
+            username_token(client.username, client.password)
             element("wsa:Action") do
               text("http://tempuri.org/ITerytWs1/PobierzListeGmin")
             end
@@ -31,7 +31,7 @@ module TERYT
         end
       end
 
-      response = perform(string)
+      response = client.perform(string)
       puts response.status
       body = response.body
 

@@ -1,16 +1,16 @@
 module TERYT
-  class County
-    getter :id, :name, :extra
-    def initialize(@id : String, @name : String, @extra : String)
+  class TERC
+    class County
+      getter :id, :name, :extra
+      def initialize(@id : String, @name : String, @extra : String)
+      end
     end
-  end
 
-  class Client
     def list_county(voivodeship_id)
       string = Builder.build do
         envelope do
           header do
-            username_token(username, password)
+            username_token(client.username, client.password)
             element("wsa:Action") do
               text("http://tempuri.org/ITerytWs1/PobierzListePowiatow")
             end
@@ -28,7 +28,7 @@ module TERYT
         end
       end
 
-      response = perform(string)
+      response = client.perform(string)
       puts response.status
       body = response.body
 
@@ -40,7 +40,6 @@ module TERYT
           .xpath_node("b:POW", {"b"=>"http://schemas.datacontract.org/2004/07/TerytUslugaWs1"}).not_nil!.text
         extra = item
           .xpath_node("b:NAZWA_DOD", {"b"=>"http://schemas.datacontract.org/2004/07/TerytUslugaWs1"}).not_nil!.text
-
 
         County.new(id, name, extra)
       end

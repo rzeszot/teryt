@@ -1,16 +1,16 @@
 module TERYT
-  class Voivodeship
-    getter :id, :name
-    def initialize(@id : String, @name : String)
+  class TERC
+    class Voivodeship
+      getter :id, :name
+      def initialize(@id : String, @name : String)
+      end
     end
-  end
 
-  class Client
     def list_voivodeship
       string = Builder.build do
         envelope do
           header do
-            username_token(username, password)
+            username_token(client.username, client.password)
             element("wsa:Action") do
               text("http://tempuri.org/ITerytWs1/PobierzListeWojewodztw")
             end
@@ -21,7 +21,7 @@ module TERYT
         end
       end
 
-      response = perform(string)
+      response = client.perform(string)
       puts response.status
 
       document = XML.parse(response.body)
